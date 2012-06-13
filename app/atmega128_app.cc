@@ -10,7 +10,7 @@
 #include <sensor.h>
 #include <nic.h>
 #include <uart.h>
-
+#include <tsg/tsg.h>
 __USING_SYS
 
 typedef union {
