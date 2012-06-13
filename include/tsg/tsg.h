@@ -11,6 +11,7 @@
 
 #include <utility/ostream.h>
 #include <utility/queue.h>
+#include <utility/string.h>
 
 __BEGIN_SYS
 
