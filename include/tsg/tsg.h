@@ -7,6 +7,7 @@
 #include <mach/atmega128/uart.h>
 #include <mach/atmega128/machine.h>
 #include <mach/atmega128/config.h>
+#include <mach/atmega128/nic.h>
 
 #include <utility/ostream.h>
 #include <utility/queue.h>
@@ -16,6 +17,12 @@ __BEGIN_SYS
 
 class ATMega128_TSG 
 {
+
+private:
+	UART uart;
+	NIC nic;
+	NIC::Address addr;
+	NIC::Protocol prot;
 
 public:
 	ATMega128_TSG();
