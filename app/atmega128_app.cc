@@ -20,29 +20,12 @@ typedef union {
 
 OStream cout;
 unsigned char count = 1;
-
-int sensor() {
-	ATMega128_Photo_Sensor sensor;
-	NIC nic;
-
-    CPU::out8(Machine::IO::DDRA, 0xff);
-    CPU::out8(Machine::IO::PORTA, ~0);
-
-    __u16 temp;
-
-    while(1) {
-		Alarm::delay(1000000);
-    	temp.s = sensor.sample();
-    	nic.send(NIC::BROADCAST, 0, temp.b, 2);
-		CPU::out8(Machine::IO::PORTA, ~count++);
-    }
-}
-
 int gateway()
 {
 	CPU::out8(Machine::IO::DDRA, 0xff);
+	CPU::out8(Machine::IO::DDRB, 0xff);
 	CPU::out8(Machine::IO::PORTA, ~0);
-
+	CPU::out8(Machine::IO::PORTB, ~0);
 	UART uart;
 	NIC nic;
 	NIC::Address addr;
@@ -52,17 +35,23 @@ int gateway()
 
 	while(true)
 	{
+		
+		CPU::out8(Machine::IO::PORTB, 0x00);
 		data_size = nic.receive(&addr, &prot, buff.b, 2);
+		CPU::out8(Machine::IO::PORTB, 0x04);
 		if(data_size != 2) continue;
+
+		CPU::out8(Machine::IO::PORTB, 0x01);
 
 		CPU::out8(Machine::IO::PORTA, ~count++);
 		uart.put(buff.b[1]);
 		uart.put(buff.b[0]);
 		buff.s = 0x0000;
+		CPU::out8(Machine::IO::PORTB, 0x04);
 	}
 }
 
 int main() {
-	return sensor();
-//	return gateway();
+	return gateway();
+	
 }

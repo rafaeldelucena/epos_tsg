@@ -7,6 +7,13 @@ ATMega128_TSG::ATMega128_TSG()
 {
 	CPU::out8(Machine::IO::DDRA, 0xff);
 	CPU::out8(Machine::IO::PORTA, ~0);
+	uart = new ATMega128_UART();
+
+}
+
+ATMega128_TSG::~ATMega128_TSG()
+{
+	delete uart;
 
 }
 
@@ -21,24 +28,32 @@ void ATMega128_TSG::config()
 	int i = 0;
 	while(vivo_lshapn[i] != "\0")
 	{
-		uart.put(vivo_lshapn[i]);
+		uart->put(vivo_lshapn[i]);
 		i++;
 	}
 	i = 0;
 	while(vivo_lshsrv[i] != "\0")
 	{
-		uart.put(vivo_lshsrv[i]);
+		uart->put(vivo_lshsrv[i]);
 		i++;
 	}
 
 }
 
-void ATMega128_TSG::send()
+void ATMega128_TSG::send(char * send)
 {
-
+	int i = 0;
+	while(send[i] != '\0')
+	{
+		uart->put(send[i]);
+		i++;
+	}
 }
 
 bool ATMega128_TSG::status()
 {
-return false;
+	if(uart = 0)
+		return false;
+	else
+		return uart->get();
 }

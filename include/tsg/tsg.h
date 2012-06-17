@@ -20,16 +20,17 @@ class ATMega128_TSG
 {
 
 private:
-	UART uart;
+	UART * uart;
 	NIC nic;
 	NIC::Address addr;
 	NIC::Protocol prot;
 
 public:
 	ATMega128_TSG();
+	~ATMega128_TSG();
 	void config();//configuração para a vivo
 
-	void send(); //enviar pacote
+	void send(char * send); //enviar pacote
 	
 	bool status(); //retornar o status apos um envio
 };
