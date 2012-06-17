@@ -13,16 +13,14 @@
 #include <tsg/tsg.h>
 __USING_SYS
 
-OStream cout;
-
 
 int main() {
 	CPU::out8(Machine::IO::DDRB, 0xff);
-	CPU::out8(Machine::IO::PORTB, 0x00);
-	for(int i = 0; i < 0xffff; i++);
+	CPU::out8(Machine::IO::PORTB, ~0);
+	//for(int i = 0; i < 0xffff; i++);
 
-	ATMega128_TSG * tsg = new ATMega128_TSG();
-	tsg->config();
+	ATMega128_TSG tsg;
+	tsg.config();
 	 
 	return 0;
 	
