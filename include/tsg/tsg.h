@@ -33,6 +33,10 @@ public:
 	void send(char * send); //enviar pacote
 	
 	bool status(); //retornar o status apos um envio
+	
+	void keep_alive();
+
+	
 };
 
 __END_SYS

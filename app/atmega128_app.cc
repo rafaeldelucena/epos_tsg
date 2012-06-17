@@ -38,9 +38,12 @@ int gateway()
 		
 		CPU::out8(Machine::IO::PORTB, 0x00);
 		data_size = nic.receive(&addr, &prot, buff.b, 2);
+		for(int i = 0; i < 0xffff; i++);
 		CPU::out8(Machine::IO::PORTB, 0x04);
+
 		if(data_size != 2) continue;
 
+		for(int i = 0; i < 0xffff; i++);
 		CPU::out8(Machine::IO::PORTB, 0x01);
 
 		CPU::out8(Machine::IO::PORTA, ~count++);
@@ -52,6 +55,9 @@ int gateway()
 }
 
 int main() {
+	CPU::out8(Machine::IO::DDRB, 0xff);
+	CPU::out8(Machine::IO::PORTB, 0x00);
+	for(int i = 0; i < 0xffff; i++);
 	return gateway();
 	
 }

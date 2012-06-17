@@ -57,3 +57,14 @@ bool ATMega128_TSG::status()
 	else
 		return uart->get();
 }
+
+bool ATMega128_TSG::keep_alive()
+{
+	char * keep = "AT-LSHTEST?";
+	int i = 0;
+	while(keep[i] != '\0')
+	{
+		uart->put(keep[i]);
+		i++;		
+	}
+}
