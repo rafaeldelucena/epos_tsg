@@ -13,6 +13,11 @@
 #include <tsg/tsg.h>
 __USING_SYS
 
+typedef union {
+	int s;
+	char b[2];
+} __u16;
+
 OStream cout;
 
 
