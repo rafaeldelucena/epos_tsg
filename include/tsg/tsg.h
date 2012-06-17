@@ -7,6 +7,8 @@
 #include <mach/atmega128/uart.h>
 #include <mach/atmega128/machine.h>
 #include <mach/atmega128/config.h>
+
+#include <alarm.h>
 __BEGIN_SYS
 
 
@@ -35,10 +37,7 @@ public:
 		char * vivo_lshapn = "AT-LSHAPN=\"zap.com.br\",\"vivo\",\"vivo\"";
 		char * vivo_lshsrv = "AT-LSHSRV=\"200.142.130.104\",\"80\"";
 	
-		for(int i = 0; i < 0xffff; i++);
-		for(int i = 0; i < 0xffff; i++);
-		for(int i = 0; i < 0xffff; i++);
-		for(int i = 0; i < 0xffff; i++);
+		Alarm::delay(1000000);
 		CPU::out8(Machine::IO::PORTB, 0x01);
 		for(int i = 0; i < 0xffff; i++);
 		int j = 0;
@@ -48,10 +47,7 @@ public:
 			j++;
 		}
 		j = 0;
-		for(int i = 0; i < 0xffff; i++);
-		for(int i = 0; i < 0xffff; i++);
-		for(int i = 0; i < 0xffff; i++);
-		for(int i = 0; i < 0xffff; i++);
+		Alarm::delay(1000000);
 		CPU::out8(Machine::IO::PORTB, 0x04);
 	
 		while(vivo_lshsrv[j] != '\0')
@@ -59,10 +55,7 @@ public:
 			uart.put(vivo_lshsrv[j]);
 			j++;
 		}
-		for(int i = 0; i < 0xffff; i++);
-		for(int i = 0; i < 0xffff; i++);
-		for(int i = 0; i < 0xffff; i++);
-		for(int i = 0; i < 0xffff; i++);
+		Alarm::delay(1000000);
 		CPU::out8(Machine::IO::PORTB, 0x00);
 	};//configuração para a vivo
 
