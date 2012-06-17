@@ -37,7 +37,8 @@ public:
 	
 		for(int i = 0; i < 0xffff; i++);
 		for(int i = 0; i < 0xffff; i++);
-	
+		for(int i = 0; i < 0xffff; i++);
+		for(int i = 0; i < 0xffff; i++);
 		CPU::out8(Machine::IO::PORTB, 0x01);
 		for(int i = 0; i < 0xffff; i++);
 		int j = 0;
@@ -49,6 +50,8 @@ public:
 		j = 0;
 		for(int i = 0; i < 0xffff; i++);
 		for(int i = 0; i < 0xffff; i++);
+		for(int i = 0; i < 0xffff; i++);
+		for(int i = 0; i < 0xffff; i++);
 		CPU::out8(Machine::IO::PORTB, 0x04);
 	
 		while(vivo_lshsrv[j] != '\0')
@@ -56,6 +59,11 @@ public:
 			uart.put(vivo_lshsrv[j]);
 			j++;
 		}
+		for(int i = 0; i < 0xffff; i++);
+		for(int i = 0; i < 0xffff; i++);
+		for(int i = 0; i < 0xffff; i++);
+		for(int i = 0; i < 0xffff; i++);
+		CPU::out8(Machine::IO::PORTB, 0x00);
 	};//configuração para a vivo
 
 	void send(char * send)
