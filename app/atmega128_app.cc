@@ -18,9 +18,16 @@ int main() {
 	CPU::out8(Machine::IO::DDRB, 0xff);
 	CPU::out8(Machine::IO::PORTB, ~0);
 	//for(int i = 0; i < 0xffff; i++);
-
+	Alarm::delay(1000000);
+	UART uart;
 	ATMega128_TSG tsg;
 	tsg.config();
+	Alarm::delay(1000000);
+	CPU::out8(Machine::IO::PORTB, ~0);
+	while(1)
+	{
+		uart.get();
+	}
 	 
 	return 0;
 	
