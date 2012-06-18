@@ -26,7 +26,8 @@ int main() {
 	CPU::out8(Machine::IO::PORTB, ~0);
 	while(1)
 	{
-		uart.get();
+		tsg.keep_alive();
+		uart.put(uart.get());
 	}
 	 
 	return 0;
