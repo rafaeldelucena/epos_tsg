@@ -9,7 +9,7 @@
 #include <alarm.h>
 #include <sensor.h>
 #include <nic.h>
-#include <uart.h>
+#include <mach/atmega128/uart.h>
 #include <tsg/tsg.h>
 __USING_SYS
 
@@ -19,7 +19,7 @@ int main() {
 	CPU::out8(Machine::IO::PORTB, ~0);
 	//for(int i = 0; i < 0xffff; i++);
 	Alarm::delay(1000000);
-	UART uart;
+	ATMega128_UART uart;
 	ATMega128_TSG tsg;
 	tsg.config();
 	Alarm::delay(1000000);
@@ -27,7 +27,7 @@ int main() {
 	while(1)
 	{
 		tsg.keep_alive();
-		uart.put(uart.get());
+		uart.put(tsg.status());
 	}
 	 
 	return 0;

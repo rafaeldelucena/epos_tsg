@@ -16,13 +16,16 @@ class ATMega128_TSG
 {
 
 private:
-	UART uart;
+	ATMega128_UART* uart;
+
+
 
 
 public:
 	ATMega128_TSG::ATMega128_TSG()
 	{
-
+		CPU::out8(Machine::IO::DDRD, 0xff);
+		uart = new ATMega128_UART(1);
 	};
 
 	ATMega128_TSG::~ATMega128_TSG()
@@ -43,7 +46,7 @@ public:
 		int j = 0;
 		while(vivo_lshapn[j] != '\0')
 		{
-			uart.put(vivo_lshapn[j]);
+			uart->put(vivo_lshapn[j]);
 			j++;
 		}
 		j = 0;
@@ -52,7 +55,7 @@ public:
 	
 		while(vivo_lshsrv[j] != '\0')
 		{
-			uart.put(vivo_lshsrv[j]);
+			uart->put(vivo_lshsrv[j]);
 			j++;
 		}
 		Alarm::delay(1000000);
@@ -64,14 +67,14 @@ public:
 		int i = 0;
 		while(send[i] != '\0')
 		{
-			uart.put(send[i]);
+			uart->put(send[i]);
 			i++;
 		}
 	}; //enviar pacote
 	
-	bool status()
+	char status()
 	{
-		return uart.get();
+		return uart->get();
 	}; //retornar o status apos um envio
 	
 	void keep_alive()
@@ -80,8 +83,9 @@ public:
 		int i = 0;
 		while(keep[i] != '\0')
 		{
-			uart.put(keep[i]);
-			i++;		
+			uart->put(keep[i]);
+			i++;
+					
 		}
 	};
 
