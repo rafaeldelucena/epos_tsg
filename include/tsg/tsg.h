@@ -126,7 +126,7 @@ public:
     }
     
     void sendKeepAlive()
-	{
+    {
 		char * keep = "AT-LSHTEST?";
 	    sendModemMessage(keep);
     }
