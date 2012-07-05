@@ -124,8 +124,8 @@ public:
         uart0.put(c);
         ledsOff(0x04);
     }
-
-	void sendKeepAlive()
+    
+    void sendKeepAlive()
 	{
 		char * keep = "AT-LSHTEST?";
 	    sendModemMessage(keep);
